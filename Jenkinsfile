@@ -20,6 +20,7 @@ pipeline{
             steps{
                 sh """
                     ssh -o StrictHostKeyChecking=no ${USER_NAME}@${IP_ADDRESS} '
+                    rm -rf i27-helpdesk-ui && \
                         git clone https://github.com/i27academy/i27-helpdesk-ui.git
                     '
                 """
