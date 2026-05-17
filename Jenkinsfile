@@ -70,6 +70,10 @@ ATTACHMENT_SERVICE_URL=http://${IP_ADDRESS}:8084
 JWT_SECRET=i27academy-secret-key-which-is-32chars
 EOF
 
+
+                        docker rm -f ${CONTAINER_NAME} || true && \
+                        docker rmi ${IMAGE_NAME} || true && \
+
                         docker build -t ${IMAGE_NAME} . && \
 
                         docker run -d --name ${CONTAINER_NAME} --env-file .env.dev -p 8080:8080 ${IMAGE_NAME}
@@ -80,8 +84,8 @@ EOF
         }
         stage('Auth Build & Deploy'){
             environment {
-                IMAGE_NAME     = "i27-helpdesk-Auth:dev"
-                CONTAINER_NAME = "i27-Auth"
+                IMAGE_NAME     = "i27-helpdesk-auth:dev"
+                CONTAINER_NAME = "i27-auth"
                 
             }
             steps {
@@ -102,6 +106,9 @@ JWT_EXPIRY_MILLIS=3600000
 
 EOF
 
+                         docker rm -f ${CONTAINER_NAME} || true && \
+                        docker rmi ${IMAGE_NAME} || true && \
+                        
                         docker build -t ${IMAGE_NAME} . && \
 
                         docker run -d --name ${CONTAINER_NAME} --env-file .env.dev -p 8081:8081 ${IMAGE_NAME}
@@ -133,6 +140,9 @@ DB_PASSWORD=Helpdesk@123
 NOTIFICATION_SERVICE_URL=http://34.172.178.28:3306:8086
 EOF
 
+                         docker rm -f ${CONTAINER_NAME} || true && \
+                        docker rmi ${IMAGE_NAME} || true && \
+                        
                         docker build -t ${IMAGE_NAME} . && \
 
                         docker run -d --name ${CONTAINER_NAME} --env-file .env.dev -p 8082:8082 ${IMAGE_NAME}
@@ -166,6 +176,9 @@ NOTIFICATION_URL=http://${IP_ADDRESS}:8084/notifications/event
 TICKET_SERVICE_URL=http://${IP_ADDRESS}:8082/tickets
 EOF
 
+                         docker rm -f ${CONTAINER_NAME} || true && \
+                        docker rmi ${IMAGE_NAME} || true && \
+                        
                         docker build -t ${IMAGE_NAME} . && \
 
                         docker run -d --name ${CONTAINER_NAME} --env-file .env.dev -p 8083:8083 ${IMAGE_NAME}
