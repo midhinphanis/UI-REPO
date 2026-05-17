@@ -94,6 +94,7 @@ EOF
                 sh """
                     ssh -o StrictHostKeyChecking=no ${USER_NAME}@${IP_ADDRESS} '
 
+                        rm -rf i27-helpdesk-auth-service && \
                         git clone https://github.com/i27academy/i27-helpdesk-auth-service.git && \
                         cd i27-helpdesk-auth-service && \
                         cat > .env.dev <<EOF
